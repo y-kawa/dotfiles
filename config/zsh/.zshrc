@@ -212,10 +212,15 @@ setopt NO_FLOW_CONTROL
 #     atinit'source "$ZDOTDIR/.zshrc.lazy"' \
 #     @'zdharma-continuum/null'
 
+### zsh plugins ###
 zinit wait lucid blockf light-mode for \
     @'zsh-users/zsh-autosuggestions' \
     @'zsh-users/zsh-completions' \
     @'zdharma-continuum/fast-syntax-highlighting'
+
+### programs ###
+zinit wait lucid light-mode as'program' from'gh-r' for \
+    pick'ripgrep*/rg'   @'BurntSushi/ripgrep'
 
 ### asdf-vm ###
 __asdf_atinit() {
