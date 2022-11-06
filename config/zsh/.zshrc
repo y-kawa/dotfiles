@@ -218,24 +218,34 @@ zinit wait lucid blockf light-mode for \
     @'zdharma-continuum/fast-syntax-highlighting'
 
 ### asdf-vm ###
-__asdf_atload() {
+__asdf_atinit() {
     export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
     export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/asdfrc"
 }
 zinit wait lucid light-mode for \
+    atinit'__asdf_atinit' \
     atpull'asdf plugin update --all' \
-    atload'__asdf_atload' \
     @'asdf-vm/asdf'
+
+### starship ###
+__starship_atclone() {
+    ./starship init zsh > init.zsh
+    ./starship completions zsh > _starship
+}
+zinit lucid light-mode as'command' from'gh-r' for \
+    atclone'__starship_atclone' \
+    atpull'%atclone' \
+    src'init.zsh' \
+    @'starship/starship'
 
 ### autoloads ###
 autoload -Uz _zinit
 zpcompinit
 
 ### old
-
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH=/opt/homebrew/opt/python@3.9/libexec/bin:$PATH
 source ~/.zsh_aliases
-
-eval "$(starship init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
 
