@@ -216,7 +216,8 @@ setopt NO_FLOW_CONTROL
 zinit wait lucid blockf light-mode for \
     @'zsh-users/zsh-autosuggestions' \
     @'zsh-users/zsh-completions' \
-    @'zdharma-continuum/fast-syntax-highlighting'
+    @'zdharma-continuum/fast-syntax-highlighting' \
+    pick'init.sh' @'b4b4r07/enhancd'
 
 ### programs ###
 zinit wait lucid light-mode as'program' from'gh-r' for \
