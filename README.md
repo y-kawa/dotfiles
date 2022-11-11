@@ -1,3 +1,5 @@
+respect for https://github.com/NagayamaRyoga/dotfiles
+
 # dotfiles
 
 ## Installation
