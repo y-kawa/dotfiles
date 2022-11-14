@@ -38,7 +38,7 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS
 setopt INTERACTIVE_COMMENTS
-setopt NO_SHARE_HISTORY
+setopt SHARE_HISTORY
 setopt MAGIC_EQUAL_SUBST
 setopt PRINT_EIGHT_BIT
 setopt NO_FLOW_CONTROL
@@ -110,6 +110,13 @@ setopt NO_FLOW_CONTROL
 #     fi
 #     zle -R -c # refresh screen
 # }
+
+__fzf__history() {
+  BUFFER=$(history -n -r 1 | fzf --exact --reverse --query="$LBUFFER" --prompt="History > ")
+  CURSOR=${#BUFFER}
+}
+zle -N __fzf__history
+bindkey '^r' __fzf__history
 
 # widget::ghq::source() {
 #     local session color icon green="\e[32m" blue="\e[34m" reset="\e[m" checked="\uf631" unchecked="\uf630"
@@ -221,6 +228,7 @@ zinit wait lucid blockf light-mode for \
 
 ### programs ###
 zinit wait lucid light-mode as'program' from'gh-r' for \
+    @'junegunn/fzf' \
     pick'ripgrep*/rg'   @'BurntSushi/ripgrep'
 
 ### asdf-vm ###
@@ -249,8 +257,9 @@ autoload -Uz _zinit
 zpcompinit
 
 ### old
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH=/opt/homebrew/opt/python@3.9/libexec/bin:$PATH
+# export PATH=/opt/homebrew/opt/python@3.9/libexec/bin:$PATH
 source ~/.zsh_aliases
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
