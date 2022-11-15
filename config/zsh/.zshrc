@@ -253,13 +253,19 @@ zinit lucid light-mode as'command' from'gh-r' for \
     @'starship/starship'
 
 ### autoloads ###
+autoload -Uz compinit && compinit
 autoload -Uz _zinit
 zpcompinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+zstyle ':completion:*:default' menu select=1
+
+if [ "$(uname)" = "Darwin" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 ### old
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-# export PATH=/opt/homebrew/opt/python@3.9/libexec/bin:$PATH
 source ~/.zsh_aliases
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
