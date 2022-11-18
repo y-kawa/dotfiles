@@ -4,6 +4,14 @@ ZINIT[HOME_DIR]="$XDG_DATA_HOME/zinit"
 ZINIT[ZCOMPDUMP_PATH]="$XDG_STATE_HOME/zcompdump"
 source "${ZINIT[HOME_DIR]}/bin/zinit.zsh"
 
+### homebrew ###
+if [ "$(uname)" = "Darwin" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+
 ### paths ###
 typeset -U path
 typeset -U fpath
@@ -20,6 +28,7 @@ path=(
 
 fpath=(
     "$XDG_DATA_HOME/zsh/completions"(N-/)
+    "$HOMEBREW_PREFIX/share/zsh/site-functions"(N-/)
     "$fpath[@]"
 )
 
@@ -224,7 +233,7 @@ zinit wait lucid blockf light-mode for \
     @'zsh-users/zsh-autosuggestions' \
     @'zsh-users/zsh-completions' \
     @'zdharma-continuum/fast-syntax-highlighting' \
-    pick'init.sh' @'b4b4r07/enhancd'
+    @'b4b4r07/enhancd'
 
 ### programs ###
 zinit wait lucid light-mode as'program' from'gh-r' for \
@@ -258,12 +267,6 @@ autoload -Uz _zinit
 zpcompinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zstyle ':completion:*:default' menu select=1
-
-if [ "$(uname)" = "Darwin" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
 
 ### old
 source ~/.zsh_aliases
