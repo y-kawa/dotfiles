@@ -266,7 +266,7 @@ autoload -Uz compinit && compinit
 autoload -Uz _zinit
 zpcompinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*:default' menu select=2
 
 ### old
 source ~/.zsh_aliases
