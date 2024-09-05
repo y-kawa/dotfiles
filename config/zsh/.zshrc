@@ -88,10 +88,11 @@ __fzf__history() {
 zle -N __fzf__history
 bindkey '^r' __fzf__history
 
-# git checkout を fzf でインタラクティブに操作する
-__fzf__git_checkout() {
-    local branch=$(git branch | fzf)
-    [ -n "$branch" ] && git checkout "$branch"
+# git switch を fzf でインタラクティブに操作する
+__fzf__git_switch() {
+    branches=$(git branch --format="%(refname:short)%09%(authordate:relative)%09%(authorname)" | grep -v HEAD)
+    branch=$(echo "$branches" | column -ts "$(printf '\t')" | fzf)
+    git switch $(echo "$branch" | awk '{print $1}' )
 }
-zle -N __fzf__git_checkout
-bindkey '^b' __fzf__git_checkout
+zle -N __fzf__git_switch
+bindkey '^b' __fzf__git_switch
