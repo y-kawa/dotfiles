@@ -29,6 +29,15 @@ else
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+### .zsh_aliases
+if [ -f $ZDOTDIR/.zsh_aliases ]; then
+    source $ZDOTDIR/.zsh_aliases
+fi
+# Gitの管理対象外のファイル。機密情報を含むような設定はこちら
+if [ -f $ZDOTDIR/.zsh_aliases_private ]; then
+    source $ZDOTDIR/.zsh_aliases_private
+fi
+
 ### Added by Zinit's installer ###
 if [[ ! -f $XDG_DATA_HOME/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
