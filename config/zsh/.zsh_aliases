@@ -1,7 +1,10 @@
 # Common Command
 alias ll='ls -l'
-alias history='history -t "%F %T"'
 alias relogin='exec $SHELL -l'
 
 # Git
 alias gs='git status'
+
+# Docker
+alias d='docker'
+alias dc='docker compose'

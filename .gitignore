@@ -1,3 +1,4 @@
 **/.zcompdump
 **/.zcompcache/
-config/zsh/.zsh_aliases_private
+
+config/**/*.local

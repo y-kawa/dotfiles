@@ -33,9 +33,11 @@ fi
 if [ -f $ZDOTDIR/.zsh_aliases ]; then
     source $ZDOTDIR/.zsh_aliases
 fi
-# Gitの管理対象外のファイル。機密情報を含むような設定はこちら
-if [ -f $ZDOTDIR/.zsh_aliases_private ]; then
-    source $ZDOTDIR/.zsh_aliases_private
+# Gitの管理対象外のファイル。機密情報を含むようなaliasはこちら
+if [ -f $ZDOTDIR/.zsh_aliases.local ]; then
+    source $ZDOTDIR/.zsh_aliases.local
+else
+    touch $ZDOTDIR/.zsh_aliases.local
 fi
 
 ### Added by Zinit's installer ###
